@@ -1,0 +1,104 @@
+<br />
+<!-- Main Card start -->
+<div class="card">
+    <div class="card-header" style="background-color:#14b6ad">
+        <h1 class="card-title text-white"><b>Serialportron</b></h1>
+        <h4 class="card-subtitle text-white mb-2">Angular + Serialport + Electron</h4>
+    </div>
+    <div class="card-body">
+        <!-- Control Board start -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header" style="background-color:#ebfbfa">
+                    <h4 class="my-0 text-primary">Control Board</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center mb-3">
+                        <button (click)="scan()" class="btn btn-info btn-lg mx-1">
+                            <b>SCAN</b>
+                        </button>
+                        <button (click)="openPort()" *ngIf="!port" [disabled]="!selectedPortId"
+                            class="btn btn-success btn-lg mx-1">
+                            <b>OPEN</b>
+                        </button>
+                        <button (click)="closePort()" *ngIf="port" [disabled]="!port"
+                            class="btn btn-danger btn-lg mx-1">
+                            <b>CLOSE</b>
+                        </button>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input [(ngModel)]="command" type="text" class="form-control text-center" placeholder="Command">
+                                <div class="input-group-append">
+                                    <button (click)="send()" [disabled]="(!command) || (!port) || (timeout)" class="btn btn-primary btn-lg mx-1">
+                                        <b>SEND</b>
+                                    </button>
+                                    <button (click)="auto()" [disabled]="(!command) || (!port)" class="btn btn-warning btn-lg mx-1">
+                                        <b>AUTO</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Control Board end -->
+        <br />
+        <!-- Available Ports start -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header" style="background-color:#ebfbfa">
+                    <div *ngIf="!selectedPortId; else selected">
+                        <h4 class="my-0 text-warning">Available Ports</h4>
+                    </div>
+                    <ng-template #selected>
+                        <h4 class="my-0 text-success">Selected Port</h4>
+                    </ng-template>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="text-left">
+                                <tr>
+                                <th>{{ tableData.headerRow[0] }}</th>
+                                <th>{{ tableData.headerRow[1] }}</th>
+                                <th>{{ tableData.headerRow[2] }}</th>
+                                <th>{{ tableData.headerRow[3] }}</th>
+                                <th>{{ tableData.headerRow[4] }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-left">
+                                <tr *ngFor="let row of tableData.dataRows">
+                                <td>{{row.id}}</td>
+                                <td><a href="javascript:void(0)" (click)="getPort($event)"><b>{{row.comName}}</b></a></td>
+                                <td >{{row.manufacturer}}</td>
+                                <td>{{row.vendorId}}</td>
+                                <td>{{row.productId}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Available Ports end -->
+        <br />
+        <!-- Log Screen start -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header" style="background-color:#ebfbfa">
+                    <h4 class="my-0 text-primary">Screen</h4>
+                </div>
+                <div class="card-body">
+                    <textarea [(ngModel)]="screen" rows="3" style="font-size:20px"
+                        class="form-control py-2 font-weight-bold text-monospace text-white bg-dark text-center">
+                    </textarea> 
+                </div>
+            </div>
+        </div>
+        <!-- Log Screen end -->
+    </div>
+</div>
+<!-- Main Card end -->

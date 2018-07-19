@@ -1,0 +1,75 @@
+<br />
+<!-- Main Card start -->
+<div class="card">
+    <div class="card-header" style="background-color:#14b6ad">
+        <h1 class="card-title text-white"><b>Serialportron</b></h1>
+        <h4 class="card-subtitle text-white mb-2">Angular + Serialport + Electron</h4>
+    </div>
+    <div class="card-body">
+        <br />
+        <!-- Control Board start -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header" style="background-color:#ebfbfa">
+                    <h4 class="my-0 text-primary">Control Board</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <button (click)="scan()" class="btn btn-info btn-lg mx-1">
+                            <b>SCAN</b>
+                        </button>
+                        <button (click)="openPort()" *ngIf="!port" [disabled]="!selectedPortId"
+                            class="btn btn-success btn-lg mx-1">
+                            <b>OPEN</b>
+                        </button>
+                        <button (click)="closePort()" *ngIf="port" [disabled]="!port"
+                            class="btn btn-danger btn-lg mx-1">
+                            <b>CLOSE</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Control Board end -->
+        <br />
+        <!-- Available Ports start -->
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header" style="background-color:#ebfbfa">
+                    <div *ngIf="!selectedPortId; else selected">
+                        <h4 class="my-0 text-warning">Available Ports</h4>
+                    </div>
+                    <ng-template #selected>
+                        <h4 class="my-0 text-success">Selected Port</h4>
+                    </ng-template>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th>{{ tableData.headerRow[0] }}</th>
+                                <th>{{ tableData.headerRow[1] }}</th>
+                                <th>{{ tableData.headerRow[2] }}</th>
+                                <th>{{ tableData.headerRow[3] }}</th>
+                                <th>{{ tableData.headerRow[4] }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of tableData.dataRows">
+                                <td class="text-center">{{row.id}}</td>
+                                <td><a href="javascript:void(0)" (click)="getPort($event)"><b>{{row.comName}}</b></a></td>
+                                <td class="text-center">{{row.manufacturer}}</td>
+                                <td class="text-center">{{row.vendorId}}</td>
+                                <td class="text-center">{{row.productId}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Available Ports end -->
+    </div>
+</div>
+<!-- Main Card end -->
