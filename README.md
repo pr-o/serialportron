@@ -5,7 +5,7 @@ This is a minimal repo consisting of a boilerplate starter app and an example ap
 
 
 ## Major Dependencies
-* [Angular 6](https://angular.io/)
+* [Angular 7](https://angular.io/)
 * [Node Serialport](https://github.com/node-serialport/node-serialport)
 * [Electron](https://electron.atom.io/)
 * [Boostrap 4](https://getbootstrap.com/)
